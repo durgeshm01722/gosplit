@@ -52,14 +52,16 @@ export default function NewTransaction(props) {
         e.preventDefault();
         let now = new Date();
         if(selectedUser.username && transaction.description && transaction.amount){
-          var budgetRemaining = userData.data.budgetRemaining, totalBalance = userData.data.totalBalance, totalAmountSpent = userData.data.totalAmountSpent;
+          var budgetRemaining = userData.data.budgetRemaining;
+          var totalBalance = userData.data.totalBalance;
+          var totalAmountSpent = userData.data.totalAmountSpent;
           if(userData.data.username!==selectedUser.username){
             budgetRemaining = userData.data.totalBalance - transaction.amount;
             totalBalance = userData.data.totalBalance - transaction.amount; 
-            totalAmountSpent = parseInt(userData.data.totalAmountSpent) + parseInt(transaction.amount);
+            totalAmountSpent = userData.data.totalAmountSpent + transaction.amount;
           }
-          await authAxios.post("/createTransaction", {requester: selectedUser.username, requestTo: localStorage.getItem("username"), date: now.getFullYear()+"-"+(((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1))+"-"+(((now.getDate())<10?"0":"")+now.getDate()),
-          description: transaction.description, amount: transaction.amount, totalBalance: totalBalance, totalAmountSpent: totalAmountSpent, budgetRemaining: budgetRemaining})
+          await authAxios.post("/createTransaction/send", {requester: selectedUser.username, requestTo: localStorage.getItem("username"), date: now.getFullYear()+"-"+(((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1))+"-"+(((now.getDate())<10?"0":"")+now.getDate()),
+          description: transaction.description, amount: parseInt(transaction.amount), totalBalance: parseInt(totalBalance), totalAmountSpent: parseInt(totalAmountSpent), budgetRemaining: parseInt(budgetRemaining)})
           .then(async (res)=>{
             document.querySelector(".backgroundNewTransaction").classList.toggle("inactive");
             document.querySelector(".backgroundNewTransaction").classList.toggle("active");
@@ -88,13 +90,13 @@ export default function NewTransaction(props) {
         e.preventDefault();
         let now = new Date();
         if(selectedUser.username && transaction.description && transaction.amount){
-          await authAxios.post("/createTransaction/request", {requester: localStorage.getItem("username"), requestTo: selectedUser.username, date: now.getFullYear()+"-"+(((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1))+"-"+(((now.getDate())<10?"0":"")+now.getDate()),
+          await authAxios.post("/createTransaction/receive", {requester: localStorage.getItem("username"), requestTo: selectedUser.username, date: now.getFullYear()+"-"+(((now.getMonth()+1)<10?"0":"")+(now.getMonth()+1))+"-"+(((now.getDate())<10?"0":"")+now.getDate()),
           description: transaction.description, amount: transaction.amount})
           .then((res)=>{
             document.querySelector(".backgroundNewTransaction").classList.toggle("inactive");
             document.querySelector(".backgroundNewTransaction").classList.toggle("active");
             props.update();
-            setTransaction({description: ""});
+            setTransaction({amount: 0, description: ""});
             setSelectedUser({username: "", name: ""})
             if(res.data==="success"){
               success("Saved Successfully!");

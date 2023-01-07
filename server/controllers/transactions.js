@@ -11,30 +11,42 @@ export const getTransactions = async (req, res) => {
 }
 
 export const createTransaction = async (req, res) => {
-    try {
-        const data = await dataModel.find({});
-        const receiver = await userDataModel.find({username: req.body.requester});
-        const transactionData = new transactionDataModel({
-            transactionID: data[0].transactionsCount+1,
-            requester: req.body.requester,
-            requestTo: req.body.requestTo,
-            date: req.body.date,
-            description: req.body.description,
-            amount: req.body.amount
-        })
-        transactionData.save();
-        if(req.body.requestTo!==req.body.requester){
-            console.log("I am executed!");
-            await userDataModel.updateOne({username: req.user.username}, {totalBalance: parseInt(req.body.totalBalance), totalAmountSpent: parseInt(req.body.totalAmountSpent), budgetRemaining: parseInt(req.body.budgetRemaining)});
-            await userDataModel.updateOne({username: req.body.requester}, {totalBalance: receiver.totalBalance+parseInt(req.body.amount), budgetRemaining: receiver.budgetRemaining+parseInt(req.body.amount)});
+    const data = await dataModel.find({});
+    const receiver = await userDataModel.find({username: req.body.requester});
+    const transactionData = new transactionDataModel({
+        transactionID: data[0].transactionsCount+1,
+        requester: req.body.requester,
+        requestTo: req.body.requestTo,
+        date: req.body.date,
+        description: req.body.description,
+        amount: req.body.amount
+    })
+    transactionData.save();
+    if(req.params.action==="send"){
+        try {
+            if(req.body.requestTo!==req.body.requester){
+                await userDataModel.updateOne({username: req.user.username}, {totalBalance: parseInt(req.body.totalBalance), totalAmountSpent: parseInt(req.body.totalAmountSpent), budgetRemaining: parseInt(req.body.budgetRemaining)});
+                await userDataModel.updateOne({username: req.body.requester}, {totalBalance: receiver[0].totalBalance+parseInt(req.body.amount), budgetRemaining: receiver[0].budgetRemaining+parseInt(req.body.amount)});
+            }
+            const count = await dataModel.find({});
+            await dataModel.updateOne({_id: "63b784d073c7642b4e0795fc"}, {transactionsCount: count[0].transactionsCount+1});
+            res.send("success");
         }
-        const count = await dataModel.find({});
-        await dataModel.updateOne({_id: "63b784d073c7642b4e0795fc"}, {transactionsCount: count[0].transactionsCount+1});
-        res.send("success");
+        catch (err) {
+            console.log(err);
+            res.send("error");
+        }
     }
-    catch (err) {
-        console.log(err);
-        res.send("error");
+    else{
+        try {
+            const count = await dataModel.find({});
+            await dataModel.updateOne({_id: "63b784d073c7642b4e0795fc"}, {transactionsCount: count[0].transactionsCount+1});
+            res.send("success");
+        }
+        catch (err) {
+            console.log(err);
+            res.send("error");
+        }
     }
 }
 

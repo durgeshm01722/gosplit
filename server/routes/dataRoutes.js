@@ -6,7 +6,7 @@ import protect from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/createTransaction", protect, createTransaction);
+router.post("/createTransaction/:action", protect, createTransaction);
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
