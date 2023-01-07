@@ -25,8 +25,8 @@ export const createTransaction = async (req, res) => {
         transactionData.save();
         if(req.body.requestTo!==req.body.requester){
             console.log("I am executed!");
-            await userDataModel.updateOne({username: req.user.username}, {totalBalance: req.body.totalBalance, totalAmountSpent: req.body.totalAmountSpent, budgetRemaining: req.body.budgetRemaining});
-            await userDataModel.updateOne({username: req.body.requester}, {totalBalance: receiver.totalBalance+req.body.amount, budgetRemaining: receiver.budgetRemaining+req.body.amount});
+            await userDataModel.updateOne({username: req.user.username}, {totalBalance: parseInt(req.body.totalBalance), totalAmountSpent: parseInt(req.body.totalAmountSpent), budgetRemaining: parseInt(req.body.budgetRemaining)});
+            await userDataModel.updateOne({username: req.body.requester}, {totalBalance: receiver.totalBalance+parseInt(req.body.amount), budgetRemaining: receiver.budgetRemaining+parseInt(req.body.amount)});
         }
         const count = await dataModel.find({});
         await dataModel.updateOne({_id: "63b784d073c7642b4e0795fc"}, {transactionsCount: count[0].transactionsCount+1});
