@@ -129,11 +129,11 @@ export default function NewTransaction(props) {
                 <div className='flex flex-row ml-[5%] lg:ml-[15%] mr-[5%] lg:mr-[0%]'>
                     <p className='text-gray-700 text-[18px] lg:text-[20px] font-semibold lg:mr-10 mb-4 lg:mb-0 w-[190px]'>Select User: </p>
                     <div className='h-[170px]'>
-                        <input className='block h-10 w-[150px] lg:w-[250px] focus:outline-0 hover:border-2 hover:border-blue-400 p-2 text-sm cursor-pointer bg-gray-200 rounded-md' type="text" required onChange={(e)=>{setSelectedUser(e);filterUsers(e);document.querySelector(".usersSelect"+props.data.transactionID).classList.add("active")}} onClick={()=>{document.querySelector(".usersSelect"+props.data.transactionID).classList.toggle("inactive");document.querySelector(".usersSelect"+props.data.transactionID).classList.toggle("active");setFilteredUsers(users)}} value={selectedUser.username}>
+                        <input className='block h-10 w-[150px] lg:w-[250px] focus:outline-0 hover:border-2 hover:border-blue-400 p-2 text-sm cursor-pointer bg-gray-200 rounded-md' type="text" required onChange={(e)=>{setSelectedUser(e);filterUsers(e);document.querySelector(".usersSelect").classList.add("active")}} onClick={()=>{document.querySelector(".usersSelect").classList.toggle("inactive");document.querySelector(".usersSelect").classList.toggle("active");setFilteredUsers(users)}} value={selectedUser.username}>
                         </input>
-                        <div id="usersSelectId" className={"h-[120px] max-h-[120px] overflow-y-scroll w-[150px] lg:w-[250px] bg-gray-200 mt-2 pl-2 pt-2 rounded-md flex-col inactive usersSelect"+props.data.transactionID}>
+                        <div id="usersSelectId" className={"h-[120px] max-h-[120px] overflow-y-scroll w-[150px] lg:w-[250px] bg-gray-200 mt-2 pl-2 pt-2 rounded-md flex-col inactive usersSelect"}>
                             {filteredUsers.map((item, key)=>{return (
-                                <div className='cursor-pointer my-[2px] ' key={key} onClick={()=>{setSelectedUser({username: item.username, name: item.name});document.querySelector(".usersSelect"+props.data.transactionID).classList.toggle("inactive");document.querySelector(".usersSelect"+props.data.transactionID).classList.toggle("active")}}>
+                                <div className='cursor-pointer my-[2px] ' key={key} onClick={()=>{setSelectedUser({username: item.username, name: item.name});document.querySelector(".usersSelect").classList.toggle("inactive");document.querySelector(".usersSelect").classList.toggle("active")}}>
                                     <h3 className='text-[15px] font-bold text-gray-700'>{item.name}</h3>
                                     <p className='text-[15px] font-semibold text-gray-700'>{item.username}</p>
                                 </div>

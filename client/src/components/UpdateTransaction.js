@@ -45,7 +45,7 @@ export default function UpdateTransaction(props) {
     
 
   return (
-    <div className={"w-[100%] h-[100%] fixed top-0 left-0 bg-black/[.548] items-center justify-center inactive backgroundUpdateTransaction"+props.data.transactionID}>
+    <div className={"fixed top-0 left-0 w-[100%] h-[100%] bg-black/[.548] items-center justify-center inactive backgroundUpdateTransaction"+props.data.transactionID}>
         <div className='rounded w-[95%] lg:w-[700px] h-[500px] border-[1px] border-gray-300 bg-white shadow-lg relative'>
               <button className='absolute top-[3%] right-[3%] z-100' onClick={()=>{document.querySelector(".backgroundUpdateTransaction"+props.data.transactionID).classList.toggle("inactive");document.querySelector(".backgroundUpdateTransaction"+props.data.transactionID).classList.toggle("active")}}><img src={closeIcon} className='w-[20px] rotate-45' alt="close"></img></button>
               <form className='mt-[20%] lg:mt-[10%]'>

@@ -9,7 +9,7 @@ import { dataContext } from '../App.js';
 
 export default function LoginDialog() {
     const [loginData, setLoginData] = useState({username: "", password: ""});
-    const data = useContext(dataContext)
+    const userData = useContext(dataContext)
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ export default function LoginDialog() {
               localStorage.setItem("name", res.data.name);
               localStorage.setItem("email", res.data.email);
               localStorage.setItem("token", res.data.token);
-              data.setData({...data.data, username: res.data.username, name: res.data.name, email: res.data.email, token: res.data.token});
+              userData.setData({...userData.data, username: res.data.username, name: res.data.name, email: res.data.email, token: res.data.token});
               document.querySelector(".backgroundLogin").classList.toggle("inactive");
               document.querySelector(".backgroundLogin").classList.toggle("active");
               window.location.href = '/';
@@ -50,7 +50,7 @@ export default function LoginDialog() {
             localStorage.setItem("name", res.data.name);
             localStorage.setItem("email", res.data.email);
             localStorage.setItem("token", res.data.token);
-            data.setData({...data.data, username: res.data.username, name: res.data.name, email: res.data.email, token: res.data.token});
+            userData.setData({...userData.data, username: res.data.username, name: res.data.name, email: res.data.email, token: res.data.token});
             document.querySelector(".backgroundLogin").classList.toggle("inactive");
             document.querySelector(".backgroundLogin").classList.toggle("active");
             window.location.href = '/';

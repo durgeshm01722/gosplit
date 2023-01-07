@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { success, fail } from "./Alerts.js";
 import axios from 'axios';
 import env from "../config.json";
@@ -8,6 +8,7 @@ import { dataContext } from '../App.js';
 
 export default function LoginDialog() {
     const [registerData, setRegisterData] = useState({name: "", username: "", email: "", password: ""});
+    const userData = useContext(dataContext);
 
     const registerUser = async (e) => {
         e.preventDefault();
@@ -23,7 +24,7 @@ export default function LoginDialog() {
               localStorage.setItem("name", res.data.name);
               localStorage.setItem("email", res.data.email);
               localStorage.setItem("token", res.data.token);
-              dataContext.setData({...dataContext.data, username: res.data.username, name: res.data.name, email: res.data.email, token: res.data.token});
+              userData.setData({...userData.data, username: res.data.username, name: res.data.name, email: res.data.email, token: res.data.token});
               document.querySelector(".backgroundRegister").classList.toggle("inactive");
               document.querySelector(".backgroundRegister").classList.toggle("active");
               window.location.href = '/';

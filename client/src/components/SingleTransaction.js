@@ -32,7 +32,7 @@ export default function SingleTransaction(props) {
   return (
     <>
     <UpdateTransaction data={props.data} update={props.update}></UpdateTransaction>
-    <div className='border-[1px] border-gray-200 w-[95%] lg:w-[90%] h-[350px] lg:h-[150px] rounded-md shadow-lg flex flex-col lg:flex-row p-[10px] px-[20px] lg:px-[30px] my-2'>
+    <div className='border-[1px] border-gray-200 w-[95%] lg:w-[90%] h-[350px] lg:h-[150px] rounded-md shadow-lg flex flex-col lg:flex-row p-[10px] px-[20px] lg:px-[30px] my-2' data-aos="fade-up" data-aos-duration="1000">
         <div className='border-b-[1px] lg:border-b-0 lg:border-r-[1px] border-gray-300 lg:w-[25%] flex flex-col justify-center items-start pb-2 lg:pb-2 overflow-hidden h-[40%] lg:h-[100%]'>
             <div className='h-[80px] lg:h-fit'>
                 <p className='text-gray-600 text-[15px] lg:text-[18px] font-bold inline'>Request from: </p>
