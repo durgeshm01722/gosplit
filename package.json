@@ -1,0 +1,15 @@
+{
+  "name": "gosplit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd server && npm install && cd ../client && npm install && npm run build",
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities{
+  .shadow-all{
+    box-shadow: 0px 5px 5px 5px rgb(0 0 0 / 0.1), 2px 5px 5px 0px rgb(0 0 0 / 0.1);
+  }
+  .active{
+    display: flex;
+  }
+  .inactive{
+    display: none;
+  }
+}
+
+@layer components{
+  .btn-violet{
+    @apply w-2/3 h-8 rounded border-none bg-violet-800 text-sm text-white font-medium hover:bg-violet-700;
+    width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-green{
+    @apply w-2/3 h-8 rounded border-none bg-green-600 text-sm text-white font-medium hover:bg-green-500;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-red{
+    @apply w-2/3 h-8 rounded border-none bg-red-600 text-sm text-white font-medium hover:bg-red-500;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* ::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+} */
+
+::-webkit-scrollbar-thumb {
+  background: rgb(162, 162, 162);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(125, 125, 125); 
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
